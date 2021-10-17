@@ -1,0 +1,8 @@
+.messages {
+  overflow: auto;
+  flex: auto;
+}
+
+.sentText {
+  margin-bottom: 0;
+}

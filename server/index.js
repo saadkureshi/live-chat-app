@@ -54,7 +54,16 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 const ENV = process.env.ENV || "development";
 const express = require("express");
+const cookieSession = require("cookie-session");
 const app = express();
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 // socket io
 const server = require("http").createServer();
@@ -110,6 +119,7 @@ app.use(express.json());
 const indexRoutes = require("./routes/index");
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
+const chatRoutes = require("./routes/chat");
 // const usersRoutes = require("./routes/users");
 
 // Mount all resource routes
@@ -117,6 +127,7 @@ app.use("/", indexRoutes(db));
 // app.use("/api/users", usersRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/login", loginRoutes(db));
+app.use("/chat", chatRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

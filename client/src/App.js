@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -14,18 +14,29 @@ import Join from './components/Join';
 import Chat from './components/Chat';
 
 function App() {
+
+  let currentUser = localStorage.getItem("user_details");
+
   return (
-    <div className="App">
-      <NavigationBar />
-      <div className = "login-register-box">
-        <RegisterForm />
-        <LoginForm />
+    <Router>
+      <div className="App">
+        <NavigationBar />
+        <Switch>
+          {currentUser ? 
+          <Route path="/chat">
+            <Chat />
+          </Route>
+          :
+          <Route path="/">
+            <div className = "login-register-box">
+              <RegisterForm />
+              <LoginForm />
+            </div>
+          </Route>
+          }
+        </Switch>
       </div>
-      <Router>
-        <Route path="/" exact component={Join} />
-        <Route path="/chat" exact component={Chat} />
-      </Router>
-    </div>
+    </Router>
   );
 }
 

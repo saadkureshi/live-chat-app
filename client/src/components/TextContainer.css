@@ -1,0 +1,42 @@
+.outermost-container {
+  border: 1px solid;
+  border-radius: 0.2rem;
+  width: 90%;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.number-online {
+  text-align: start;
+  font-size: 1.2rem;
+}
+
+.textContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+}
+
+.each-online-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.onlineIcon {
+  height: 6px;
+  width: auto;
+}
+
+
+.activeContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50%;
+}
+
+.online-typists-heading {
+  font-size: 1rem;
+}
