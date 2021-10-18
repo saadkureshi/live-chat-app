@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from './components/NavigationBar';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import Join from './components/Join';
 import Chat from './components/Chat';
 
 function App() {

@@ -22,7 +22,6 @@ function LoginForm() {
     .then(res => {
       console.log(res);
       localStorage.setItem('user_details', JSON.stringify(res.data[0]));
-      console.log("Just set local storage");
       history.push("/chat");
       history.go(0);
     })
