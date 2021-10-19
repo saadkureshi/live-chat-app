@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import './RegisterForm.css';
 
@@ -12,6 +12,8 @@ function RegisterForm() {
     password: ""
   });
 
+  const [successfulRegister, setSuccessfulRegister] = useState(false);
+
   const onSubmitRegisterForm = e => {
     e.preventDefault();
     axios.post('http://localhost:5000/register', {
@@ -22,9 +24,11 @@ function RegisterForm() {
     })
     .then(res => {
       console.log(res);
+      setSuccessfulRegister(true);
     })
     .catch(err => {
       console.log(err);
+      setSuccessfulRegister(false);
     })
   }
 
@@ -94,6 +98,11 @@ function RegisterForm() {
         <Button variant="primary" type="submit" onClick={e => onSubmitRegisterForm(e)}>
           Submit
         </Button>
+        {successfulRegister && 
+          <Alert variant="success" className="successful-register">
+            User added successfully.
+          </Alert>
+        }
       </Form>
     </div>
   )

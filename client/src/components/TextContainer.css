@@ -30,13 +30,8 @@
   width: auto;
 }
 
-
 .activeContainer {
   display: flex;
   align-items: center;
   margin-bottom: 50%;
-}
-
-.online-typists-heading {
-  font-size: 1rem;
 }
