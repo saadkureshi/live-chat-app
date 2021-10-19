@@ -5,21 +5,6 @@ const saltRounds = 10;
 
 module.exports = (db) => {
 
-  router.get("/", (req, res) => {
-
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-
-  });
-
   router.post("/", (req, res) => {
 
     let firstName = req.body.firstName;
@@ -34,12 +19,9 @@ module.exports = (db) => {
       RETURNING *;
     `, [firstName, lastName, userName, hashedPassword])
       .then(response => {
-        console.log("JUST ADDED");
         res.send(response);
       })
       .catch(e => {
-        console.log("ERROR");
-        console.log(e);
         res.send(e);
       });
   });

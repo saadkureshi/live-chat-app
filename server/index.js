@@ -16,7 +16,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
-// socket io
+// Socket io set up
 const server = require("http").createServer();
 const io = require("socket.io")(server, {
   transports: ["websocket", "polling"]
@@ -52,13 +52,11 @@ io.on("connection", client => {
 const indexRoutes = require("./routes/index");
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
-const chatRoutes = require("./routes/chat");
 
 // Mount all resource routes
 app.use("/", indexRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/login", loginRoutes(db));
-app.use("/chat", chatRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

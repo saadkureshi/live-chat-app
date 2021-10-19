@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
@@ -13,6 +13,8 @@ function LoginForm() {
     password: ""
   });
 
+  const [incorrectLogin, setIncorrectLogin] = useState(false);
+
   const onSubmitLoginForm = e => {
     e.preventDefault();
     axios.post('http://localhost:5000/login', {
@@ -20,12 +22,12 @@ function LoginForm() {
       password: loginFormInput.password
     })
     .then(res => {
-      console.log(res);
       localStorage.setItem('user_details', JSON.stringify(res.data[0]));
       history.push("/chat");
       history.go(0);
     })
     .catch(err => {
+      setIncorrectLogin(true);
       console.log(err);
     })
   }
@@ -65,6 +67,11 @@ function LoginForm() {
         <Button variant="primary" type="submit" onClick={e => onSubmitLoginForm(e)}>
           Submit
         </Button>
+        {incorrectLogin && 
+          <Alert variant="danger" className="incorrect-credentials">
+            Incorrect username or password. Please try again.
+          </Alert>
+        }
       </Form>
     </div>
   )
